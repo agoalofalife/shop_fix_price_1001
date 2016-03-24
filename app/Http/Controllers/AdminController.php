@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use  Illuminate\Pagination\Paginator;
-use App\Http\Requests;
-use App\Products;
-use App\Category_Products;
 
-class CategoryController extends Controller
+use App\Http\Requests;
+
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
+        return view('admin.index');
 
     }
 
@@ -48,15 +48,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if(is_null($id))return redirect('');
-        $categories          = Category_Products::all()->where('status','1');
-        $data['categories']  = $categories;
-
-//        $data['products']    = Products ::all()->where('id_catalog',$id)->where('status','1');
-        $data['products']  = Products::where('status','1')->where('id_catalog',$id)->paginate(6);
-
-
-        return view('category.index',$data);
+        //
     }
 
     /**

@@ -14,16 +14,18 @@
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/', 'HomeController@index');
-    Route::resource('category','CategoryController@index');
+    Route::resource('category','CategoryController');
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('admin', 'AdminController');
 
 
+
+    });
 });
 
 Route::get('/test',function(){
 return \App\Products::with('category')->first();
 });
-Route::group(['middleware' => 'auth'], function () {
-//    Route::get('/home', 'HomeController@index');
 
 
-});

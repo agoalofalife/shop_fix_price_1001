@@ -24,8 +24,15 @@
                         </div>
                     </div>
                             @endforeach
+
                 </div>
             </div>
+
         </div>
+
+        @unless (!$products)
+            <div style="text-align: center">{{  $products->render()}}</div>
+        @endunless
+
     </div>
 </div>
