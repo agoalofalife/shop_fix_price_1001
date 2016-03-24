@@ -12,15 +12,18 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+    Route::auth();
+    Route::get('/', 'HomeController@index');
+    Route::resource('category','CategoryController@index');
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
 
 });
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::get('/test',function(){
+return \App\Drinks::with('category')->first();
+});
+Route::group(['middleware' => 'auth'], function () {
+//    Route::get('/home', 'HomeController@index');
 
-    Route::get('/home', 'HomeController@index');
+
 });

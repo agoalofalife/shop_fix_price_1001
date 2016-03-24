@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category_Products;
+use App\Drinks;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -24,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories          = Category_Products::all()->where('status','1');
+        $data['categories']  = $categories;
+        return view('welcome',$data);
+
+
+
     }
 }
