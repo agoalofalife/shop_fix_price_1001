@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDrinksTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,17 @@ class CreateDrinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('drinks', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',30);
-            $table->string('mark',30);
+            $table->integer('id_catalog')->unsigned();
+            $table->string('title',50);
+            $table->string('mark',50);
             $table->integer('count');
-            $table->enum('volume',['0.33','0.5','1.0']);
             $table->text('description');
-            $table->enum('status',['0','1']);
-            $table->string('color_tara',50);
-            $table->boolean('gases');
-            $table->boolean('recommend');
+            $table->boolean('status');
+            $table->text('link_img');
             $table->timestamps();
+
         });
     }
 
@@ -34,6 +33,6 @@ class CreateDrinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('drinks');
+        Schema::drop('products');
     }
 }

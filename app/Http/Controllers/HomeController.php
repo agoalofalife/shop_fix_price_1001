@@ -29,8 +29,5 @@ class HomeController extends Controller
         $categories          = Category_Products::all()->where('status','1');
         $data['categories']  = $categories;
         return view('welcome',$data);
-
-
-
     }
 }

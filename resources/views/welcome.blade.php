@@ -10,7 +10,7 @@
                         <ul class="nav nav-sidebar">
                             <li><a href="#" class="bg-primary">Категории</a></li>
                             @foreach($categories as $nameColumn)
-                        <li>  <a href="#">{{  $nameColumn->title }}</a></li>
+                        <li>  <a href="category/{{ $nameColumn->id }}">{{  $nameColumn->title }}</a></li>
                             @endforeach
                         </ul>
                     </div>

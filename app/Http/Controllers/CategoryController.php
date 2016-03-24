@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Products;
+use App\Category_Products;
 
 class CategoryController extends Controller
 {
@@ -13,9 +15,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($table = null)
-    {
-        echo "welcom";
+    public function index($id){
+        if(is_null($id))return redirect('');
+        $categories          = Category_Products::all()->where('status','1');
+        $data['categories']  = $categories;
+        $products            = Products ::all()->where('id_catalog',$id)->where('status','1');
+        $data['products']    = $products;
+        return view('category.index',$data);
     }
 
     /**

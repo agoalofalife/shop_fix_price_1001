@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterDrinksRelations extends Migration
+class AlterProductsRelations extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class AlterDrinksRelations extends Migration
      */
     public function up()
     {
-        Schema::table('drinks', function($table) {
-            $table->foreign('category_id')
-                ->references('id')->on('category__products')
-                ->onDelete('cascade');
-        });
+      Schema::table('products',function($table){
+          $table->foreign('id_catalog')
+              ->references('id')->on('category__products')
+              ->onDelete('cascade');
+      });
+
+
     }
 
     /**

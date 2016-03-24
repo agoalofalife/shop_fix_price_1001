@@ -20,7 +20,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('/test',function(){
-return \App\Drinks::with('category')->first();
+return \App\Products::with('category')->first();
 });
 Route::group(['middleware' => 'auth'], function () {
 //    Route::get('/home', 'HomeController@index');
