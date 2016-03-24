@@ -11,13 +11,13 @@
     <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="/starter-template.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,9 +50,9 @@
 </div>
 
     <ul class="nav nav-pills nav-stacked col-md-2" >
-        <li class="active "><a href="/">Главная</a></li>
-                        <li><a href="#">Категории</a></li>
-                        <li><a href="#">Статьи</a></li>
+        <li class="active "><a href="/admin">Главная</a></li>
+                        <li><a href="/admin/category">Категории</a></li>
+                        <li><a href="#">Товары</a></li>
         </ul>
 
 @yield('content')
@@ -60,7 +60,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
 

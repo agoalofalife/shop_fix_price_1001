@@ -17,6 +17,10 @@ class CategoryController extends Controller
      */
     public function index(){
 
+        $categories          = Category_Products::all();
+        $data['categories']  = $categories;
+        $data['counter']     = 1;
+        return view('admin.category',$data);
     }
 
     /**
@@ -26,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +41,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            [
+                'newCategory' => 'required|max:30',
+                'display'     => 'required|integer|boolean'
+            ]);
+
+        $new_category           = new Category_Products();
+        $new_category->title    = $request->newCategory;
+        $new_category->status   = $request->display;
+        $new_category->save();
+        return redirect('/admin/category');
     }
 
     /**
@@ -52,7 +66,6 @@ class CategoryController extends Controller
         $categories          = Category_Products::all()->where('status','1');
         $data['categories']  = $categories;
 
-//        $data['products']    = Products ::all()->where('id_catalog',$id)->where('status','1');
         $data['products']  = Products::where('status','1')->where('id_catalog',$id)->paginate(6);
 
 
@@ -67,7 +80,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['category'] = Category_Products::find($id);
+        return view('admin.category_edit',$data);
     }
 
     /**
@@ -79,7 +93,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,
+            [
+                'title'       => 'required|max:30',
+                'display'     => 'required|integer|boolean'
+
+            ]);
+
+        $category         = Category_Products::find($id);
+        $category->title  = $request->title;
+        $category->status = $request->display;
+        $category->save();
+        return redirect('/admin/category');
+
     }
 
     /**
@@ -90,6 +116,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category_Products::destroy($id);
+        return redirect('/admin/category');
+
     }
 }

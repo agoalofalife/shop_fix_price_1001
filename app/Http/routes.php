@@ -14,14 +14,19 @@
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/', 'HomeController@index');
-    Route::resource('category','CategoryController');
+
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('admin', 'AdminController');
-
-
-
+        Route::get('admin/category/destroy/{id}','CategoryController@destroy');
+        Route::patch('admin/category/{id}','CategoryController@update');
+        Route::get('admin/category/edit/{id}','CategoryController@edit');
+        Route::post('admin/category/create','CategoryController@store');
+        Route::get('admin/category','CategoryController@index');
+        Route::get('/admin', 'AdminController@index');
     });
+
+    Route::get('category/{id}','CategoryController@show');
+
 });
 
 Route::get('/test',function(){

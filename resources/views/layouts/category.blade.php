@@ -29,7 +29,7 @@
             </div>
 
         </div>
-
+        {{--Вывод пагинации--}}
         @unless (!$products)
             <div style="text-align: center">{{  $products->render()}}</div>
         @endunless
