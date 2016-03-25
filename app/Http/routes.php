@@ -23,6 +23,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('admin/category/create','CategoryController@store');
         Route::get('admin/category','CategoryController@index');
         Route::get('/admin', 'AdminController@index');
+        Route::get('/admin/products', 'ProductsController@index');
+
     });
 
     Route::get('category/{id}','CategoryController@show');
@@ -31,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/test',function(){
 return \App\Products::with('category')->first();
+
 });
 
 

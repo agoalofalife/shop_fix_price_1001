@@ -52,7 +52,7 @@
     <ul class="nav nav-pills nav-stacked col-md-2" >
         <li class="active "><a href="/admin">Главная</a></li>
                         <li><a href="/admin/category">Категории</a></li>
-                        <li><a href="#">Товары</a></li>
+                        <li><a href="/admin/products">Товары</a></li>
         </ul>
 
 @yield('content')
