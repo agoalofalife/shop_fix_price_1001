@@ -17,7 +17,6 @@
                                 <img src="../images/avatar0.jpg" alt="product" >
                                 <div class="caption">
                                     <h3>{{$product->title}}</h3>
-                                    <p>{{$product->description}}</p>
                                     <p style="text-align: center">Остаток на складе {{$product->count}}</p>
                                     <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
                                 </div>

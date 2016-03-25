@@ -24,6 +24,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/category','CategoryController@index');
         Route::get('/admin', 'AdminController@index');
         Route::get('admin/products/edit/{id}','ProductsController@edit');
+        Route::patch('admin/products/{id}','ProductsController@update');
         Route::post('/admin/products/filter', 'ProductsController@filter');
         Route::get('/admin/products', 'ProductsController@index');
     });

@@ -103,7 +103,22 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,
+        [
+                'title'              => 'required|max:30',
+                'mark'               => 'required|max:30',
+                'description'        => 'required|max:1500',
+                'recommend'          => 'required|boolean',
+                'display'            => 'required|integer|boolean',
+        ]);
+        $product = Products::find($id);
+        $product->title       = $request->title;
+        $product->mark        = $request->mark;
+        $product->description = $request->description;
+        $product->recommend   = $request->recommend;
+        $product->status      = $request->display;
+        $product->save();
+        return redirect('/admin/products');
     }
 
     /**
