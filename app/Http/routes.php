@@ -23,8 +23,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('admin/category/create','CategoryController@store');
         Route::get('admin/category','CategoryController@index');
         Route::get('/admin', 'AdminController@index');
+        Route::get('admin/products/edit/{id}','ProductsController@edit');
+        Route::post('/admin/products/filter', 'ProductsController@filter');
         Route::get('/admin/products', 'ProductsController@index');
-
     });
 
     Route::get('category/{id}','CategoryController@show');

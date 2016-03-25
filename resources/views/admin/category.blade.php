@@ -3,7 +3,8 @@
     <div class="container col-md-6">
     <table class="table">
         <tr class="info">
-            <td>№</td><td>Название категории</td><td>Статус категории</td>
+            <td>№</td><td>Название категории</td>
+            <td>Статус категории</td>
         </tr>
                     @foreach($categories as $category_value)
             <tr>
