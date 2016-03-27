@@ -95,6 +95,7 @@ class ProductsController extends Controller
     {
         //Излекаем номер запрошенного каталога
           $obj_catalog    = DB::table('products')->where('id','=',$id)->select('id_catalog')->first();
+
 //        dd($number_catalog);
 //        DB::table('category_products')
 //            ->where('')

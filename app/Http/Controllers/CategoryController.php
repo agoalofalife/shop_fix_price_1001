@@ -8,7 +8,7 @@ use  Illuminate\Pagination\Paginator;
 use App\Http\Requests;
 use App\Products;
 use App\Category_Products;
-
+use Illuminate\Database\Schema;
 class CategoryController extends Controller
 {
     /**
@@ -42,31 +42,38 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $this->validate($request,
             [
                 'newCategory' => 'required|max:30',
                 'display'     => 'required|integer|boolean'
             ]);
-//        dd($request);
+
        for($i=0;$i<count($request->name_text);$i++){
+           if(empty($request->name_text[$i]))continue;
            $arrayParametrs[$i][] = $request->name_text[$i] ;
            $arrayParametrs[$i][] = $request->type_form[$i] ;
-           $arrayParametrs[$i][] = $request->slug[$i] ;
+           $arrayParametrs[$i][] = $request->slug[$i];
        }
+        for($i=0;$i<count($request->name_attribut);$i++){
+            if(empty($request->name_attribut[$i]))continue;
+            $arrayParametrs[$request->name_select[0]][$request->name_attribut[$i]] =$request->name_slug[$i];
+        }
+//
+//
+//       dd(serialize($arrayParametrs));
+        Schema::create('test', function($table)
+        {
+            $table->increments('id');
+        });
         dd($arrayParametrs);
-//foreach($request->name_text as $name){
-//    $arrayParametrs[] = $name;
-//    $arrayParametrs[] = $request->type_form;
-//}
-dd($request);
-       dd(unserialize(serialize($request->type_form)));
+        $new_category                       = new Category_Products();
+        $new_category->title                = $request->newCategory;
+        $new_category->status               = $request->display;
+        $new_category->slug                 = $request->slug_table;
+        $new_category->field_attributes     = serialize($arrayParametrs);
 
-        $new_category           = new Category_Products();
-        $new_category->title    = $request->newCategory;
-        $new_category->status   = $request->display;
         $new_category->save();
+
         return redirect('/admin/category');
     }
 

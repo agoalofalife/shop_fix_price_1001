@@ -34,8 +34,10 @@
                     <option value="1" >Показывать</option>
                     <option value="0" >Не показывать</option>
                 </select><br>
+                <p>Добавить slug для параметров (на анг)*</p>
+                <input type="text" name="slug_table" class="form-control"><br>
 
-            <p>Добавить текстовый параметр в категорию</p>
+            <p>Добавить дополнительный параметр в категорию</p>
 
             {{--<input type="text" name="name" class="form-control col-md-3 ">--}}
             <table class="table ">
