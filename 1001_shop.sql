@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 27 2016 г., 19:24
+-- Время создания: Мар 27 2016 г., 21:37
 -- Версия сервера: 5.5.47-0ubuntu0.14.04.1
 -- Версия PHP: 5.5.9-1ubuntu4.14
 
@@ -59,18 +59,20 @@ CREATE TABLE IF NOT EXISTS `category__products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field_attributes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `category__products`
 --
 
-INSERT INTO `category__products` (`id`, `title`, `status`, `created_at`, `updated_at`, `slug`) VALUES
-(2, 'Электротовары', '1', '2016-02-29 21:00:00', '0000-00-00 00:00:00', 'electric'),
-(3, 'Бензопила', '1', NULL, '2016-03-27 12:12:42', ''),
-(4, 'Компоненты 	для Arduino', '1', '2016-03-24 14:34:48', '2016-03-24 14:34:48', ''),
-(6, 'Учебники', '1', '2016-03-24 16:32:31', '2016-03-24 16:32:31', 'book');
+INSERT INTO `category__products` (`id`, `title`, `status`, `created_at`, `updated_at`, `slug`, `field_attributes`) VALUES
+(2, 'Электротовары', '1', '2016-02-29 21:00:00', '0000-00-00 00:00:00', 'electric', ''),
+(4, 'Компоненты 	для Arduino', '1', '2016-03-24 14:34:48', '2016-03-24 14:34:48', '', ''),
+(6, 'Учебники', '1', '2016-03-24 16:32:31', '2016-03-24 16:32:31', 'book', ''),
+(7, 'Автомобили', '1', NULL, NULL, 'auto', 'a:3:{i:0;a:3:{i:0;s:9:"Цвет ";i:1;s:4:"text";i:2;s:5:"color";}i:1;a:3:{i:0;s:6:"Тип";i:1;s:8:"textarea";i:2;s:4:"Type";}s:20:"Марка авто ";a:2:{s:10:"Аудио";s:5:"audio";s:10:"Митцу";s:5:"Mitsu";}}'),
+(8, 'Котики', '1', '2016-03-27 14:31:43', '2016-03-27 14:31:43', 'cate', 'a:2:{i:0;a:3:{i:0;s:12:"Шерсть";i:1;s:4:"text";i:2;s:3:"mex";}s:17:"Цвет глаз";a:2:{s:14:"Зеленый";s:5:"green";s:15:"Голубой ";s:4:"blue";}}');
 
 -- --------------------------------------------------------
 
@@ -162,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `recommend` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `products_id_catalog_foreign` (`id_catalog`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Дамп данных таблицы `products`
@@ -172,7 +174,8 @@ INSERT INTO `products` (`id`, `id_catalog`, `title`, `mark`, `count`, `descripti
 (3, 2, 'Бензопила', 'Инокентий', 10, 'Отличная пила для тех, кого все достали!', 1, 'a:2:{i:0;s:28:"/images/product/chainsaw.png";i:1;s:28:"/images/product/chainsaw.png";}', NULL, '2016-03-26 16:42:55', 0),
 (8, 6, 'История истории', 'Издательство Россия', 150, 'Ну так се,ниче не понятно', 1, '', NULL, NULL, 0),
 (9, 2, 'Чайник', 'Bosh', 20, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?', 1, 'a:2:{i:0;s:32:"/images/product/чайник.png";i:1;s:28:"/images/product/chainsaw.png";}', NULL, NULL, 0),
-(11, 2, 'Кофеварка', 'Bosh', 32, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?', 1, 'a:2:{i:0;s:38:"/images/product/кофеварка.png";i:1;s:28:"/images/product/chainsaw.png";}', NULL, NULL, 0);
+(11, 2, 'Кофеварка', 'Bosh', 32, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem, consectetur cumque dignissimos doloremque eligendi est exercitationem explicabo id illum in laborum minus porro, quae quod ut velit, voluptatibus voluptatum?', 1, 'a:2:{i:0;s:38:"/images/product/кофеварка.png";i:1;s:28:"/images/product/chainsaw.png";}', NULL, NULL, 0),
+(12, 7, 'Ламборджини', 'Ламборджини', 1, 'Тут надо просто попробывать', 1, '', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
