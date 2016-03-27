@@ -11,10 +11,11 @@
                             @endforeach
                         </ul>
                     </div>
-                            @foreach($products as $product)
+
+                    @foreach($products as $product)
                         <div class="col-md-2" >
                             <div class="thumbnail" >
-                                <img src="../images/avatar0.jpg" alt="product" >
+                                <img src="{{unserialize($product->link_img)['0']}}" alt="product" >
                                 <div class="caption">
                                     <h3>{{$product->title}}</h3>
                                     <p style="text-align: center">Остаток на складе {{$product->count}}</p>

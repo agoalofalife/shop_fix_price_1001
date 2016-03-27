@@ -19,7 +19,7 @@ class ProductsController extends Controller
              $data['products'] = DB::table('products')
              ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
              ->select('category__products.title as title_category',
-                'products.title as title_product','mark','count','products.id as id')
+                      'products.title as title_product','mark','count','products.id as id')
              ->paginate(40);
 
         $data['category'] = Category_Products::all('title');
@@ -35,15 +35,15 @@ class ProductsController extends Controller
         //Простити меня за этот кастыль
 
         $data['category'] = Category_Products::all('title','id');
-//        dd($request);
+
         $data['products'] = DB::table('products')
             ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
             ->where([
-                    ['products.count'          ,'<',$request->quantity],
+                    ['products.count'          ,'<',$request  ->quantity],
                     ['category__products.id'   ,$sign,$request->filter_category]
                     ])
             ->select('category__products.title as title_category',
-                'products.title as title_product','mark','count')
+                'products.title as title_product','mark','count','products.id as id')
             ->paginate(40);
 
         $data['counter']  = 1;
@@ -90,8 +90,21 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $date['product'] = Products::find($id);
-        return view('admin.products.edit',$date);
+
+        //Излекаем номер запрошенного каталога
+        $number_catalog    = DB::table('products')->where('id','=',$id)->select('id_catalog')->first();
+        return Products::returnEditTable($number_catalog->id_catalog,$id);
+//        return view('admin.products.edit_electric', Products::returnEditTable($number_catalog->id_catalog,$id));
+//        $test = Products::find($id)->select('id_catalog');        dd($test->id_catalog);
+//        $data['product'] = DB::table('products')
+//            ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
+//            ->where('products.id','=',$id)
+//            ->select('category__products.title as title_category',
+//                'products.title as title','mark','count','description','products.id as id','id_catalog')
+//            ->first();
+//        dd($data['product']);
+//        $date['product'] = Products::find($id);
+//        return view('admin.products.edit',$data);
     }
 
     /**
@@ -110,6 +123,7 @@ class ProductsController extends Controller
                 'description'        => 'required|max:1500',
                 'recommend'          => 'required|boolean',
                 'display'            => 'required|integer|boolean',
+
         ]);
         $product = Products::find($id);
         $product->title       = $request->title;
@@ -118,7 +132,8 @@ class ProductsController extends Controller
         $product->recommend   = $request->recommend;
         $product->status      = $request->display;
         $product->save();
-        return redirect('/admin/products');
+        if(Products::updateProductArg($product->id_catalog,$id,$request,$this)) return redirect('/admin/products');
+
     }
 
     /**

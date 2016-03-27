@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use  Illuminate\Pagination\Paginator;
 use App\Http\Requests;
@@ -62,13 +63,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if(is_null($id))return redirect('');
         $categories          = Category_Products::all()->where('status','1');
         $data['categories']  = $categories;
-
-        $data['products']  = Products::where('status','1')->where('id_catalog',$id)->paginate(6);
-
-
+        $data['products']    = Products::where('status','1')->where('id_catalog',$id)->paginate(6);
         return view('category.index',$data);
     }
 
