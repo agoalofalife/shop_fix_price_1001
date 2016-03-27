@@ -46,13 +46,16 @@
                 <li><a href="/">На сайт</a></li>
             </ul>
         </div><!--/.nav-collapse -->
+
     </div>
+
 </div>
 
     <ul class="nav nav-pills nav-stacked col-md-2" >
         <li class="active "><a href="/admin">Главная</a></li>
                         <li><a href="/admin/category">Категории</a></li>
                         <li><a href="/admin/products">Товары</a></li>
+                        <li><a href="/admin/products/create">Создать товар</a></li>
         </ul>
 
 @yield('content')

@@ -5,7 +5,7 @@
  <input type="text" name="guarantee" value="{{$attributes->guarantee or ''}}" class="form-control"> <br>
 
  <p>Тип электроприборов</p>
- <select class="form-control input-lg " name="type_device">
+ <select class="form-control " name="type_device">
      <option value="nothing"  ></option>
      @foreach($type_device as $device)
          @if($device==$attributes->type)

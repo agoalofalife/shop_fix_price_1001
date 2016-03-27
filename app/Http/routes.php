@@ -20,13 +20,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/category/destroy/{id}','CategoryController@destroy');
         Route::patch('admin/category/{id}','CategoryController@update');
         Route::get('admin/category/edit/{id}','CategoryController@edit');
-        Route::post('admin/category/create','CategoryController@store');
+        Route::post('admin/category/store','CategoryController@store');
         Route::get('admin/category','CategoryController@index');
         Route::get('/admin', 'AdminController@index');
+        Route::get('/admin/products/create','ProductsController@create');
         Route::get('admin/products/edit/{id}','ProductsController@edit');
         Route::patch('admin/products/{id}','ProductsController@update');
         Route::post('/admin/products/filter', 'ProductsController@filter');
         Route::get('/admin/products', 'ProductsController@index');
+
     });
 
     Route::get('category/{id}','CategoryController@show');

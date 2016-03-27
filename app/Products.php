@@ -43,7 +43,7 @@ class Products extends Model
     }
     public static function updateProductArg($id_catalog,$id,$request,$validation_attributes)
     {
-//       dd($request);
+
         switch($id_catalog)
         {
 

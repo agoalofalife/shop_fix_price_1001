@@ -42,11 +42,25 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,
             [
                 'newCategory' => 'required|max:30',
                 'display'     => 'required|integer|boolean'
             ]);
+//        dd($request);
+       for($i=0;$i<count($request->name_text);$i++){
+           $arrayParametrs[$i][] = $request->name_text[$i] ;
+           $arrayParametrs[$i][] = $request->type_form[$i] ;
+           $arrayParametrs[$i][] = $request->slug[$i] ;
+       }
+        dd($arrayParametrs);
+//foreach($request->name_text as $name){
+//    $arrayParametrs[] = $name;
+//    $arrayParametrs[] = $request->type_form;
+//}
+dd($request);
+       dd(unserialize(serialize($request->type_form)));
 
         $new_category           = new Category_Products();
         $new_category->title    = $request->newCategory;

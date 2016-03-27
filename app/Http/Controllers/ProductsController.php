@@ -57,7 +57,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        //Извлекаем категории товаров
+        $data['categories'] = DB::table('category__products')->select('title','id')->get();
+
+        return view('admin.product_create',$data);
     }
 
     /**
@@ -90,21 +93,25 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-
         //Излекаем номер запрошенного каталога
-        $number_catalog    = DB::table('products')->where('id','=',$id)->select('id_catalog')->first();
-        return Products::returnEditTable($number_catalog->id_catalog,$id);
-//        return view('admin.products.edit_electric', Products::returnEditTable($number_catalog->id_catalog,$id));
-//        $test = Products::find($id)->select('id_catalog');        dd($test->id_catalog);
-//        $data['product'] = DB::table('products')
-//            ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
-//            ->where('products.id','=',$id)
-//            ->select('category__products.title as title_category',
-//                'products.title as title','mark','count','description','products.id as id','id_catalog')
-//            ->first();
-//        dd($data['product']);
-//        $date['product'] = Products::find($id);
-//        return view('admin.products.edit',$data);
+          $obj_catalog    = DB::table('products')->where('id','=',$id)->select('id_catalog')->first();
+//        dd($number_catalog);
+//        DB::table('category_products')
+//            ->where('')
+//            ->get();
+
+        $slug_catalog = Category_Products::find($obj_catalog->id_catalog);
+
+        $data['attributes'] = DB::table($slug_catalog->slug.'__attributes')
+            ->leftJoin( 'products','id_product', '=', 'products.id')
+            ->where('id_product','=',$id)
+            ->first();
+        $data['template']        = 'admin.products.edit_'.$slug_catalog->slug;
+        $data['type_device']     = ['Бытовые','Строительные','Профессиональные','Отечественные'];
+
+        return view('admin.products.edit',$data);
+//        return Products::returnEditTable($number_catalog->id_catalog,$id);
+
     }
 
     /**

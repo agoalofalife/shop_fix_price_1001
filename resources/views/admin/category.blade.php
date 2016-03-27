@@ -1,6 +1,6 @@
 @extends('layouts.default_admin')
 @section('content')
-    <div class="container col-md-6">
+    <div class="container col-md-4">
     <table class="table">
         <tr class="info">
             <td>№</td><td>Название категории</td>
@@ -26,22 +26,81 @@
     </table>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <form action="/admin/category/create" method="post">
+        <div class="col-md-6">
+            <form action="/admin/category/store" method="post">
                 {{csrf_field()}}
                 Добавить категорию:<input type="text" name="newCategory" class="form-control"> <br>
-                <select class="form-control input-lg " name="display">
+                <select class="form-control" name="display">
                     <option value="1" >Показывать</option>
                     <option value="0" >Не показывать</option>
                 </select><br>
+
+            <p>Добавить текстовый параметр в категорию</p>
+
+            {{--<input type="text" name="name" class="form-control col-md-3 ">--}}
+            <table class="table ">
+                <tr><td>Название</td><td>Тип формы</td><td>Слаг на анг*</td></tr>
+                <tr>
+                    <td><input type="text" name="name_text[]" class="form-control"></td>
+
+                    <td><select class="form-control" name="type_form[]">
+                            <option value="text"    >Маленький текст</option>
+                            <option value="textarea">Большой текст</option>
+                            <option value="" selected></option>
+                     </select></td>
+                    <td><input type="text" name="slug[]" class="form-control  "></td></tr>
+
+
+                <tr>
+                    <td><input type="text" name="name_text[]" class="form-control"></td>
+
+                    <td><select class="form-control" name="type_form[]">
+                            <option value="text"    >Маленький текст</option>
+                            <option value="textarea">Большой текст</option>
+                            <option value="" selected></option>
+                        </select></td>
+                    <td><input type="text" name="slug[]" class="form-control"></td></tr>
+
+                <tr>
+                    <td><input type="text" name="name_text[]" class="form-control"></td>
+
+                    <td><select class="form-control" name="type_form[]">
+                            <option value="text"    >Маленький текст</option>
+                            <option value="textarea">Большой текст</option>
+                            <option value="" selected></option>
+                        </select></td>
+                    <td><input type="text" name="slug[]" class="form-control "></td></tr>
+
+            </table><br>
+
+                <p>Добавить параметр - список в категорию</p>
+
+                <table class="table ">
+                    <tr><td>Название списка</td><td>Название параметра</td><td>Слаг на анг*</td></tr>
+                    <tr>
+                        <td><input type="text" name="name_select[]" class="form-control "></td>
+
+                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
+                        <td><input type="text" name="name_slug[]" class="form-control "></td></tr>
+
+                    <tr><td></td>
+                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
+                        <td><input type="text" name="name_slug[]" class="form-control "></td>
+                    </tr>
+
+                    <tr><td></td>
+                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
+                        <td><input type="text" name="name_slug[]" class="form-control "></td>
+                    </tr>
+                    <tr><td></td>
+                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
+                        <td><input type="text" name="name_slug[]" class="form-control "></td>
+                    </tr>
+
+                </table><br>
                 <input type="submit" class="btn btn-success" value="Добавить">
             </form>
-            @forelse ($errors->all() as $error)
-                <h4><p class="bg-danger ">{{$error}}</p></h4>
-            @empty
-
-            @endforelse
-            @stop
         </div>
     </div>
-
+    @include('layouts.errors')
+@stop
