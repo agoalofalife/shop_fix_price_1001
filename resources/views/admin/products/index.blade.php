@@ -16,10 +16,14 @@
                 <td>    {{$product->mark}}          </td>
                 <td>    {{$product->title_category}}</td>
                 <td>    {{$product->count}}         </td>
-                    {{--{{$product->number_product}}--}}
+
                 <td><a href="/admin/products/edit/{{$product->id}}">
                 <span class="glyphicon glyphicon-edit " title="Редактировать"></span></a>
-                </td></tr>
+                <td>
+                 <span class="glyphicon glyphicon-remove" data-toggle="modal"
+                data-target="#myModal" title="Удалить"></span>
+                    </td>
+                </tr>
                 @endforeach
         </table>
     </div>
@@ -51,5 +55,30 @@
     @unless (!$products)
         <div style="text-align: center">{{  $products->render()}}</div>
     @endunless
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+                </div>
+                <div class="modal-body">
+                 Ты уверен что хочешь удалить товар?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Не уверен(</button>
+                    <a href="/admin/products/destroy/{{$product->id}}"><button type="button" class="btn btn-primary">Конечно</button></a>
+
+                </div>
+            </div>
+        </div>
     </div>
 @stop

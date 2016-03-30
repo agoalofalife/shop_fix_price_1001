@@ -15,11 +15,12 @@
                     @foreach($products as $product)
                         <div class="col-md-2" >
                             <div class="thumbnail" >
-                                <img src="{{unserialize($product->link_img)['0']}}" alt="product" >
+                                <a href="/product/{{$product->id}}"><img src="{{unserialize($product->link_img)['0']}}" width="120" height="100"
+                                     alt="product" ></a>
                                 <div class="caption">
-                                    <h3>{{$product->title}}</h3>
+                                    <h4>{{$product->title}}</h4>
                                     <p style="text-align: center">Остаток на складе {{$product->count}}</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-success pull-center" role="button">Заказать</a></p>
                                 </div>
                         </div>
                     </div>

@@ -3,6 +3,8 @@
     <div class="row">
         <div class="col-md-6">
 
+            <form action="/admin/products/store/{{$category}}" method="post"  enctype="multipart/form-data">
+                {{csrf_field()}}
     <p>Название продукта*</p>
     <input type="text" name="title" class="form-control"> <br>
 
@@ -16,7 +18,7 @@
      <textarea class="form-control" name="description" rows="5"></textarea><br>
 
     <p>Показывать на сайте</p>
-    <select class="form-control input-lg" name="status">
+    <select class="form-control" name="status">
     <option value="1"       selected>Да</option>
     <option value="0"               >Нет</option>
 
@@ -29,18 +31,26 @@
     <label class="radio-inline">
      <input type="radio" name="recommend"  value="0" checked>Нет
      </label><br><br>
-
-       <p>Выбрать категорию товара*</p>
-       <select class="form-control " name="type_learning">
-       <option value="nothing"></option>
-       @foreach($categories as $category)
-       <option value="{{$category->id}}">{{$category->title}}</option>
-       @endforeach
-       </select><br>
+        @foreach($parameters as $value_parameter)
+                @if ($value_parameter->type     == 'text')
+                    @include('admin.template_form.text')
+                @elseif ($value_parameter->type == 'select')
+                    @include('admin.template_form.select')
+                @elseif ($value_parameter->type == 'texterea')
+                    @include('admin.template_form.select')
+                    @elseif ($value_parameter->type == 'number')
+                        @include('admin.template_form.number')
+                    @endif
+            @endforeach
 
     <p>Загрузить картинки</p>
-    <input type="file" name="file" multiple /><br>
+                <h6>С помощью Ctr можете загрузить несколько изображений</h6>
+                <p><input type="file" name="photo[]" multiple accept="image/*,image/jpeg"><br>
 
+                <input  value="Создать" class="btn btn-success" type="submit">
+            </form>
+
+            @include('layouts.errors')
         </div>
     </div>
 

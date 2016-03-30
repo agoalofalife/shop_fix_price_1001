@@ -7,8 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
+    <title>Админка</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +41,6 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="/">На сайт</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -55,7 +53,7 @@
         <li class="active "><a href="/admin">Главная</a></li>
                         <li><a href="/admin/category">Категории</a></li>
                         <li><a href="/admin/products">Товары</a></li>
-                        <li><a href="/admin/products/create">Создать товар</a></li>
+                        <li><a href="/admin/products/create/choice">Создать товар</a></li>
         </ul>
 
 @yield('content')

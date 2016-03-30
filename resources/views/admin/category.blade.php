@@ -21,6 +21,7 @@
         <a href="/admin/category/destroy/{{$category_value->id}}" style="float: right"  rel="tooltip" title="Удалить" >
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td> </tr>
 
+
                    @endforeach
 
     </table>
@@ -31,77 +32,65 @@
                 {{csrf_field()}}
                 Добавить категорию:<input type="text" name="newCategory" class="form-control"> <br>
                 <select class="form-control" name="display">
-                    <option value="1" >Показывать</option>
-                    <option value="0" >Не показывать</option>
+                    <option value="1" >Показывать на сайте</option>
+                    <option value="0" >Не показывать на сайте</option>
                 </select><br>
-                <p>Добавить slug для параметров (на анг)*</p>
-                <input type="text" name="slug_table" class="form-control"><br>
-
+                {{--Таблица для добавление парматров категорию--}}
             <p>Добавить дополнительный параметр в категорию</p>
-
-            {{--<input type="text" name="name" class="form-control col-md-3 ">--}}
-            <table class="table ">
-                <tr><td>Название</td><td>Тип формы</td><td>Слаг на анг*</td></tr>
-                <tr>
-                    <td><input type="text" name="name_text[]" class="form-control"></td>
-
-                    <td><select class="form-control" name="type_form[]">
-                            <option value="text"    >Маленький текст</option>
-                            <option value="textarea">Большой текст</option>
-                            <option value="" selected></option>
-                     </select></td>
-                    <td><input type="text" name="slug[]" class="form-control  "></td></tr>
+                <table class="table">
+                 <tr><td>Название параметра</td><td>Тип поля</td><td>Значения по умолчанию</td></tr>
+                    @for ($i = 0; $i < 3; $i++)
+                        <tr><td><input type="text" name="nameAttribut[]" class="form-control"> </td>
+                            <td>
+                                <select class="form-control" name="type_form[]">
+                                    <option value="texterea" >   Большое поле</option>
+                                    <option value="text"     >   Маленькое поле</option>
+                                    <option value="select"   >   Выпадаюший список</option>
+                                    <option value="number"   >   Числовое поле</option>
 
 
-                <tr>
-                    <td><input type="text" name="name_text[]" class="form-control"></td>
+                                </select>
+                            </td>
+                            <td><input type="text" name="default[]" class="form-control"> </td></tr>
+                    @endfor
 
-                    <td><select class="form-control" name="type_form[]">
-                            <option value="text"    >Маленький текст</option>
-                            <option value="textarea">Большой текст</option>
-                            <option value="" selected></option>
-                        </select></td>
-                    <td><input type="text" name="slug[]" class="form-control"></td></tr>
+                </table>
 
-                <tr>
-                    <td><input type="text" name="name_text[]" class="form-control"></td>
 
-                    <td><select class="form-control" name="type_form[]">
-                            <option value="text"    >Маленький текст</option>
-                            <option value="textarea">Большой текст</option>
-                            <option value="" selected></option>
-                        </select></td>
-                    <td><input type="text" name="slug[]" class="form-control "></td></tr>
 
-            </table><br>
-
-                <p>Добавить параметр - список в категорию</p>
-
-                <table class="table ">
-                    <tr><td>Название списка</td><td>Название параметра</td><td>Слаг на анг*</td></tr>
-                    <tr>
-                        <td><input type="text" name="name_select[]" class="form-control "></td>
-
-                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
-                        <td><input type="text" name="name_slug[]" class="form-control "></td></tr>
-
-                    <tr><td></td>
-                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
-                        <td><input type="text" name="name_slug[]" class="form-control "></td>
-                    </tr>
-
-                    <tr><td></td>
-                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
-                        <td><input type="text" name="name_slug[]" class="form-control "></td>
-                    </tr>
-                    <tr><td></td>
-                        <td><input type="text" name="name_attribut[]" class="form-control "></td>
-                        <td><input type="text" name="name_slug[]" class="form-control "></td>
-                    </tr>
-
-                </table><br>
                 <input type="submit" class="btn btn-success" value="Добавить">
-            </form>
+            </form><br>
+
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Справка заполнение параметров
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <img src="/images/info_form.png" alt="">
+                          1.В первой ячейки пишем название парметра.<br>
+                          2.Во второй указываем какой тип поля нам нужен<br>
+                          3.Если тип поля по умолчанию не подразумевает<br>
+                          значения по умолчанию, то не указваем.<br>
+                          4.5.В таком поле как выпадающий список указываем значения.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
     @include('layouts.errors')
