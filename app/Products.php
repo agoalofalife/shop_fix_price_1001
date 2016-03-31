@@ -12,6 +12,18 @@ class Products extends Model
     {
         return $this->belongsTo('App\Category_Products');
     }
+    public function parameters()
+    {
+//        return $this->belongsTo('App\Parameters', 'id', 'id_product');
+        return $this->hasOne('App\Parameters','id_product', 'id');
+
+    }
+    public function attributes()
+    {
+        return $this->belongsTo('App\Category_Attributes', 'id_catalog', 'id_category');
+//        return $this->hasOne('App\Parameters','id_product', 'id');
+
+    }
 
     public static function returnEditTable($id_catalog,$id)
     {

@@ -12,28 +12,20 @@
                         </ul>
                     </div>
 
-                    @foreach($products as $product)
-                        <div class="col-md-2" >
-                            <div class="thumbnail" >
-                                <a href="/product/{{$product->id}}"><img src="{{unserialize($product->link_img)['0']}}" width="120" height="100"
-                                     alt="product" ></a>
-                                <div class="caption">
-                                    <h4>{{$product->title}}</h4>
-                                    <p style="text-align: center">Остаток на складе {{$product->count}}</p>
-                                    <p><a href="#" class="btn btn-success pull-center" role="button">Заказать</a></p>
-                                </div>
-                        </div>
-                    </div>
-                            @endforeach
-
+@if(isset($products))
+@include('products.template_show')
+@endif
                 </div>
             </div>
 
         </div>
         {{--Вывод пагинации--}}
-        @unless (!$products)
-            <div style="text-align: center">{{  $products->render()}}</div>
-        @endunless
+        @if(isset($products))
+            @unless (!$products)
+                <div style="text-align: center">{{  $products->render()}}</div>
+            @endunless
+        @endif
+
 
     </div>
 </div>

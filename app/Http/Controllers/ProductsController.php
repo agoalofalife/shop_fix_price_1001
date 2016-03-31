@@ -202,7 +202,22 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        echo "я тебя ждал!";
+        $data['categories']          = Category_Products::all();
+        $data['counter']             = 1;
+//        $data['test']                = Products::with('parameters')->get();
+        $data['parameters']          = Products::with('attributes','parameters')->get();
+//        $data['product']             = Products::find($id);
+
+        $data['product']  = DB::table('products')
+//            ->join('category__attributes', 'category__attributes.id_category', '=', 'products.id_catalog')
+            ->join('parameters', 'parameters.id_product', '=','products.id')
+
+//            ->where('parameters.id_product','=',$id)
+
+//            ->select('title','description','link_img','mark', 'type', 'data')
+                    ->get();
+        dd($data['product']);
+        return view('products.show',$data);
     }
 
     /**
