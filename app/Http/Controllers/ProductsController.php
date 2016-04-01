@@ -196,27 +196,18 @@ class ProductsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Shows data from a DB about parameter value
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        $data['categories']          = Category_Products::all();
-        $data['counter']             = 1;
-//        $data['test']                = Products::with('parameters')->get();
-        $data['parameters']          = Products::with('attributes','parameters')->get();
-//        $data['product']             = Products::find($id);
-
-        $data['product']  = DB::table('products')
-//            ->join('category__attributes', 'category__attributes.id_category', '=', 'products.id_catalog')
-            ->join('parameters', 'parameters.id_product', '=','products.id')
-
-//            ->where('parameters.id_product','=',$id)
-
-//            ->select('title','description','link_img','mark', 'type', 'data')
-                    ->get();
-        dd($data['product']);
+        $data['categories']            = Category_Products::all();
+        $data['counter']               = 1;
+        $data['parameters']            = Products::with('parameters')->get();
+        $data['product']               = Products::find($id);
+        $data['list_attributes']       = Products::find($id)->parameters;
+        $data['list_head_attributes']  = Category_Products::find($data['list_attributes'] [0]->id_category)->attributes;
         return view('products.show',$data);
     }
 

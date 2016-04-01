@@ -1,6 +1,6 @@
 @extends('layouts.app')
     @section('content')
-        {{--{{dd($parameters)}}--}}
+        {{--{{dd($list_attributes)}}--}}
         @for($i=0;$i<count(unserialize($product->link_img));$i++)
            {{--{{ dd(unserialize($product->link_img)[$i])}}--}}
            <div class="container">
@@ -19,9 +19,9 @@
                    <dd>{{$product->mark}}</dd>
                    <dt>Описание товара </dt>
                    <dd>{{$product->description}}</dd>
-                   @for($i=0;$i<count($product);$i++)
-                       <dt></dt>
-                       <dd></dd>
+                   @for($i=0;$i<count($list_head_attributes);$i++)
+                       <dt>{{$list_head_attributes[$i]->parameter}}</dt>
+                       <dd>{{$list_attributes[$i]->data}}</dd>
                        @endfor
 
                </dl>
