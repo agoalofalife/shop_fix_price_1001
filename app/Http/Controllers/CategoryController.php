@@ -42,6 +42,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,
             [
                 'newCategory' => 'required|max:30',
@@ -62,12 +63,16 @@ class CategoryController extends Controller
             ['title' => $request->newCategory, 'status' =>$request->display]
         );
            for($i = 0; $i < count($request->nameAttribut); $i++){
-               DB::table('category__attributes')->insert([
-                   ['id_category'=> $id_category,
-                    'parameter'  => $request->nameAttribut[$i],
-                    'type' => $request->type_form[$i],
-                    'default'=>$request->default[$i]]
-               ]);
+               if(!empty($request->nameAttribut[$i]))
+               {
+                   DB::table('category__attributes')->insert([
+                       ['id_category'=> $id_category,
+                        'parameter'  => $request->nameAttribut[$i],
+                        'type' => $request->type_form[$i],
+                        'default'=>$request->default[$i]]
+                   ]);
+               }
+
            }
         return redirect('/admin/category');
     }

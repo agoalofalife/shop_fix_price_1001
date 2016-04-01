@@ -18,7 +18,7 @@
                     @foreach($recommend_list_products as $products_recommend)
                         <div class="col-md-2" >
                             <div class="thumbnail" >
-                                <img src="{{unserialize($products_recommend->link_img)[0]}}" alt="product" >
+                                <a href="/product/{{$products_recommend->id}}"><img src="{{unserialize($products_recommend->link_img)[0]}}" alt="product" ></a>
                                 <div class="caption">
                                     <h3>{{$products_recommend->title}}</h3>
                                     <p style="text-align: center">Остаток на складе {{$products_recommend->count}}</p>

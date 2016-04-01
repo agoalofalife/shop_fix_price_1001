@@ -31,7 +31,7 @@ class HomeController extends Controller
                                            ->where('count','>','0')
                                            ->where('status','=','1')
                                            ->get();
-//        dd($data['recommend_list_products']);
+
         return view('welcome',$data);
     }
 }

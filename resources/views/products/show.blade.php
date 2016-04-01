@@ -1,12 +1,14 @@
 @extends('layouts.app')
     @section('content')
+        <div class="container">
+            <div class="row">
+                <div class="row" >
         @for($i=0;$i<count(unserialize($product->link_img));$i++)
-           <div class="container">
-               <div class="row">
-                   <div class="row" >
-            <div class=" col-md-2">
+
+            <div class=" col-md-3">
                     <img src=" {{unserialize($product->link_img)[$i]}}" alt="...">
             </div>
+
         @endfor
                    </div>
                </div>

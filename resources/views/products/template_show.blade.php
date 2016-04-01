@@ -1,7 +1,7 @@
 @foreach($products as $product)
     <div class="col-md-2" >
         <div class="thumbnail" >
-            <a href="/product/{{$product->id}}"><img src="{{unserialize($product->link_img)['0']}}" width="120" height="100"
+            <a href="/product/{{$product->id}}"><img src="{{unserialize($product->link_img)['0']}}" width="130" height="130"
                                                      alt="product" ></a>
             <div class="caption">
                 <h4>{{$product->title}}</h4>
