@@ -6,7 +6,7 @@
             <div class="caption">
                 <h4>{{$product->title}}</h4>
                 <p style="text-align: center">Остаток на складе {{$product->count}}</p>
-                <p><a href="#" class="btn btn-success pull-center" role="button">Заказать</a></p>
+                <p><a href="/cart/add/{{$product->id}}" class="btn btn-success pull-center" role="button">Заказать</a></p>
             </div>
         </div>
     </div>

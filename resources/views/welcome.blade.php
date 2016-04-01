@@ -22,7 +22,7 @@
                                 <div class="caption">
                                     <h3>{{$products_recommend->title}}</h3>
                                     <p style="text-align: center">Остаток на складе {{$products_recommend->count}}</p>
-                                    <p><a href="#" class="btn btn-success pull-center" role="button">Заказать</a></p>
+                                    <p><a href="/cart/add/{{$products_recommend->id}}" class="btn btn-success pull-center" role="button">Заказать</a></p>
                                 </div>
                             </div>
                         </div>

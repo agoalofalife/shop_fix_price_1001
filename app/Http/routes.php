@@ -36,7 +36,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/admin/products', 'ProductsController@index');
 
     });
-
+    Route::get('/cart/add/{id}','CartController@add');
+    Route::resource('cart','CartController');
     Route::get('category/{id}','CategoryController@show');
     Route::get('product/{id}','ProductsController@show');
 

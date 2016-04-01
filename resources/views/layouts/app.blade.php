@@ -64,6 +64,7 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
+                        <li><a href="{{ url('/cart') }}"><span class="glyphicon glyphicon-shopping-cart"><span class="badge">{{Session::get('count')}}</span></span></a></li>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Выйти</a></li>
                             </ul>
