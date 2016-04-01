@@ -1,8 +1,6 @@
 @extends('layouts.app')
     @section('content')
-        {{--{{dd($list_attributes)}}--}}
         @for($i=0;$i<count(unserialize($product->link_img));$i++)
-           {{--{{ dd(unserialize($product->link_img)[$i])}}--}}
            <div class="container">
                <div class="row">
                    <div class="row" >
@@ -23,7 +21,6 @@
                        <dt>{{$list_head_attributes[$i]->parameter}}</dt>
                        <dd>{{$list_attributes[$i]->data}}</dd>
                        @endfor
-
                </dl>
            </div>
 @stop

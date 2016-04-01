@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category_Products;
-use App\Drinks;
+use App\Products;
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,10 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+
     }
 
     /**
@@ -26,8 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories          = Category_Products::all()->where('status','1');
-        $data['categories']  = $categories;
+        $categories                      = Category_Products::all()->where('status','1');
+        $data['categories']              = $categories;
+        $data['recommend_list_products'] = Products::where('recommend','=','1')
+                                           ->where('count','>','0')
+                                           ->where('status','=','1')
+                                           ->get();
+//        dd($data['recommend_list_products']);
         return view('welcome',$data);
     }
 }

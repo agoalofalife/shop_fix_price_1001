@@ -14,18 +14,23 @@
                             @endforeach
                         </ul>
                     </div>
-
-            <div class="col-md-2" >
-                <div class="thumbnail" >
-                    <img src="images/avatar0.jpg" alt="product" >
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
+                    <h3>Рекомендованный товар</h3>
+                    @foreach($recommend_list_products as $products_recommend)
+                        <div class="col-md-2" >
+                            <div class="thumbnail" >
+                                <img src="{{unserialize($products_recommend->link_img)[0]}}" alt="product" >
+                                <div class="caption">
+                                    <h3>{{$products_recommend->title}}</h3>
+                                    <p style="text-align: center">Остаток на складе {{$products_recommend->count}}</p>
+                                    <p><a href="#" class="btn btn-success pull-center" role="button">Заказать</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
         </div>
     </div>
 </div>
-@endsection
+</div>
+</div>
+    @stop
+

@@ -39,7 +39,7 @@
             <p>Добавить дополнительный параметр в категорию</p>
                 <table class="table">
                  <tr><td>Название параметра</td><td>Тип поля</td><td>Значения по умолчанию</td></tr>
-                    @for ($i = 0; $i < 3; $i++)
+                    @for ($i = 0; $i < 5; $i++)
                         <tr><td><input type="text" name="nameAttribut[]" class="form-control"> </td>
                             <td>
                                 <select class="form-control" name="type_form[]">

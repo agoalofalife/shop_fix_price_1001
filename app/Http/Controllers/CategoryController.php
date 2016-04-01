@@ -42,7 +42,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-//Сделать ВАЛИДАЦИЮ!!
+        $this->validate($request,
+            [
+                'newCategory' => 'required|max:30',
+                'display'     => 'required|integer|boolean'
+            ]);
+        for($i=0;$i<count($request->nameAttribut);$i++)
+        {
+            $this->validate($request,
+                [
+                    $request->nameAttribut[$i] => 'max:100',
+                    $request->type_form[$i] => 'in::text,select,number,texterea',
+                    $request->default[$i] => 'max:100',
+                ]);
+        }
+
         //Узнаем id категории
         $id_category = DB::table('category__products')->insertGetId(
             ['title' => $request->newCategory, 'status' =>$request->display]
@@ -55,14 +69,6 @@ class CategoryController extends Controller
                     'default'=>$request->default[$i]]
                ]);
            }
-        dd();
-
-        $this->validate($request,
-            [
-                'newCategory' => 'required|max:30',
-                'display'     => 'required|integer|boolean'
-            ]);
-
         return redirect('/admin/category');
     }
 
@@ -76,7 +82,9 @@ class CategoryController extends Controller
     {
         $categories          = Category_Products::all()->where('status','1');
         $data['categories']  = $categories;
-        $data['products']    = Products::where('status','1')->where('id_catalog',$id)->paginate(6);
+        $data['products']    = Products::where('status','1')
+                                        ->where('id_catalog',$id)
+                                        ->paginate(6);
         return view('category.index',$data);
     }
 
