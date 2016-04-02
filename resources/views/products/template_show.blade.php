@@ -1,5 +1,5 @@
 @foreach($products as $product)
-    <div class="col-md-2" >
+    <div class="col-md-4" >
         <div class="thumbnail" >
             <a href="/product/{{$product->id}}"><img src="{{unserialize($product->link_img)['0']}}" width="130" height="130"
                                                      alt="product" ></a>

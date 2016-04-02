@@ -20,8 +20,13 @@
                    <dt>Описание товара </dt>
                    <dd>{{$product->description}}</dd>
                    @for($i=0;$i<count($list_head_attributes);$i++)
-                       <dt>{{$list_head_attributes[$i]->parameter}}</dt>
-                       <dd>{{$list_attributes[$i]->data}}</dd>
+                       @if(empty($list_attributes[$i]->data))
+
+
+                       @else
+                               <dt>{{$list_head_attributes[$i]->parameter}}</dt>
+                               <dd>{{$list_attributes[$i]->data}}</dd>
+                       @endif
                        @endfor
                </dl>
            </div>

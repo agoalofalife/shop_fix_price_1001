@@ -1,22 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    @if(session('info'))
+    <div class="alert alert-success">{{session('info')}}</div>
+    @endif
+    <div class="container ">
+
     <div class="row">
         <div class="row" >
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2 sidebar">
-                        <ul class="nav nav-sidebar">
-                            <li><a href="#" class="bg-primary">Категории</a></li>
-                            @foreach($categories as $nameColumn)
-                        <li>  <a href="category/{{ $nameColumn->id }}">{{  $nameColumn->title }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @include('category.template')
                     <h3>Рекомендованный товар</h3>
                     @foreach($recommend_list_products as $products_recommend)
-                        <div class="col-md-2" >
+                        <div class="col-md-3" >
                             <div class="thumbnail" >
                                 <a href="/product/{{$products_recommend->id}}"><img src="{{unserialize($products_recommend->link_img)[0]}}" alt="product" ></a>
                                 <div class="caption">
@@ -27,6 +24,14 @@
                             </div>
                         </div>
                     @endforeach
+                    {{--Вывод пагинации--}}
+                    @if(isset($recommend_list_products))
+                        @unless (!$recommend_list_products)
+                            <div style="text-align: center">{{  $recommend_list_products->render()}}</div>
+                        @endunless
+                    @endif
+
+                </div>
         </div>
     </div>
 </div>

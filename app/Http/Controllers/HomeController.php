@@ -30,7 +30,8 @@ class HomeController extends Controller
         $data['recommend_list_products'] = Products::where('recommend','=','1')
                                            ->where('count','>','0')
                                            ->where('status','=','1')
-                                           ->get();
+                                           ->paginate(3);
+
 
         return view('welcome',$data);
     }

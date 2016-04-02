@@ -88,8 +88,9 @@ class CategoryController extends Controller
         $categories          = Category_Products::all()->where('status','1');
         $data['categories']  = $categories;
         $data['products']    = Products::where('status','1')
+                                        ->where('count','>','0')
                                         ->where('id_catalog',$id)
-                                        ->paginate(6);
+                                        ->paginate(5);
         return view('category.index',$data);
     }
 

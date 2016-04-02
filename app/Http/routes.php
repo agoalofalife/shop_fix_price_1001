@@ -34,9 +34,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::patch('admin/products/{id}','ProductsController@update');
         Route::post('/admin/products/filter', 'ProductsController@filter');
         Route::get('/admin/products', 'ProductsController@index');
-
+        Route::get('/cart/create/order', 'CartController@createOrder');
     });
+    Route::get('/cart/correct/{id}','CartController@correct');
     Route::get('/cart/add/{id}','CartController@add');
+    Route::get('/cart/destroy/{id}','CartController@destroy');
     Route::resource('cart','CartController');
     Route::get('category/{id}','CategoryController@show');
     Route::get('product/{id}','ProductsController@show');
