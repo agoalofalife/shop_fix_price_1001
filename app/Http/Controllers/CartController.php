@@ -125,8 +125,16 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \phpmailerException
+     */
     public function createOrder()
     {
+        if(empty(Cart::getContent()->toArray()))
+        {
+         return redirect()->back()->with('empty_cart', 'У вас пустая корзина!');
+        }
         $orderArray = Cart::getContent()->toArray();
         $output = 'Ваш заказ<br>';
         foreach($orderArray as $goods)

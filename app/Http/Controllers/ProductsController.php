@@ -26,7 +26,7 @@ class ProductsController extends Controller
              ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
              ->select('category__products.title as title_category',
                       'products.title as title_product','mark','count','products.id as id')
-             ->paginate(40);
+             ->paginate(20);
 
         $data['category'] = Category_Products::all('title');
         $data['counter']  = 1;
@@ -50,7 +50,7 @@ class ProductsController extends Controller
                     ])
             ->select('category__products.title as title_category',
                 'products.title as title_product','mark','count','products.id as id')
-            ->paginate(40);
+            ->paginate(20);
 
         $data['counter']  = 1;
         return view('admin.products.index',$data);
@@ -184,14 +184,7 @@ class ProductsController extends Controller
                 $new_parameter->data        = $set_user;
                 $new_parameter->save();
             }
-
-        $data['products'] = DB::table('products')
-            ->leftJoin( 'category__products','id_catalog', '=', 'category__products.id')
-            ->select('category__products.title as title_category',
-                'products.title as title_product','mark','count','products.id as id')
-            ->paginate(40);
-
-         return   $this->index();
+        return redirect('/admin/products');
     }
 
     /**

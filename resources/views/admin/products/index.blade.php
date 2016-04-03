@@ -26,13 +26,12 @@
                 </tr>
                 @endforeach
         </table>
+
+
     </div>
     </div>
     <form class="col-md-2" action="/admin/products/filter" method="post">
         {{csrf_field()}}
-        {{--Максимальная цена до :--}}
-        {{--<input type="text" name="max_price" class="form-control"> <br>--}}
-
         Количество на складе :
         <select class="form-control input-lg " name="quantity">
             <option value="10" >До 10 </option>
@@ -55,6 +54,7 @@
     @unless (!$products)
         <div style="text-align: center">{{  $products->render()}}</div>
     @endunless
+
     </div>
 
     <!-- Button trigger modal -->

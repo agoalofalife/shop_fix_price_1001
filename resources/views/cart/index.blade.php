@@ -3,7 +3,12 @@
 @section('content')
     @include('category.template')
     <div class="col-md-6">
+    @if(Session::get('empty_cart'))
+            <div class="alert alert-warning">
+                <a href="#" class="alert-link">{{Session::get('empty_cart')}}</a>
+            </div>
 
+        @endif
     <table class="table">
         <tr class="info"><td>Название</td><td>Цена</td><td>Количество</td></tr>
     @foreach($array_cart_for_pay as $goods)
