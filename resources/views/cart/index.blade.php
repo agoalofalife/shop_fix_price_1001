@@ -42,7 +42,7 @@
                         @endforeach
                         <tr class="danger"><td>В  корзине всего {{Session::get('count')}} товаров</td><td>На общую сумму  {{Session::get('count')*1001}} </td></tr>
                     </table>
-                    <p>Вам будет отправленно уведомление на почту {{Auth::user()->email}}</p>
+                    <p>Вам будет отправленно уведомление на почту {{ isset(Auth::user()->email) ? Auth::user()->email : '' }}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

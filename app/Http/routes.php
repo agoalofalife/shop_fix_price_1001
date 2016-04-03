@@ -15,39 +15,34 @@ Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/', 'HomeController@index');
 
-
         Route::group(['middleware' => 'auth'], function () {
-        Route::get('admin/category/destroy/{id}','CategoryController@destroy');
-        Route::patch('admin/category/{id}','CategoryController@update');
-        Route::get('admin/category/edit/{id}','CategoryController@edit');
-        Route::post('admin/category/store','CategoryController@store');
-        Route::get('admin/category','CategoryController@index');
-        Route::get('/admin', 'AdminController@index');
-        Route::get('admin/products/destroy/image/{id}','ProductsController@destroy_image');
-        Route::get('admin/products/destroy/{id}','ProductsController@destroy');
+            Route::group(['middleware' => 'admin'], function(){
+                Route::get(  'admin/category/destroy/{id}','CategoryController@destroy');
+                Route::patch('admin/category/{id}','CategoryController@update');
+                Route::get(  'admin/category/edit/{id}','CategoryController@edit');
+                Route::post( 'admin/category/store','CategoryController@store');
+                Route::get(  'admin/category','CategoryController@index');
+                Route::get(  '/admin', 'AdminController@index');
+                Route::get(  'admin/products/destroy/image/{id}','ProductsController@destroy_image');
+                Route::get(  'admin/products/destroy/{id}','ProductsController@destroy');
+                Route::post( 'admin/products/store/{id}','ProductsController@store');
+                Route::get(  '/admin/products/create/choice','ProductsController@choice');
+                Route::get(  '/admin/products/create/{id}','ProductsController@create');
+                Route::get(  'admin/products/edit/{id}','ProductsController@edit');
+                Route::patch('admin/products/{id}','ProductsController@update');
+                Route::post( '/admin/products/filter', 'ProductsController@filter');
+                Route::get(  '/admin/products', 'ProductsController@index');
+            });
 
-        Route::post('admin/products/store/{id}','ProductsController@store');
-
-        Route::get('/admin/products/create/choice','ProductsController@choice');
-        Route::get('/admin/products/create/{id}','ProductsController@create');
-        Route::get('admin/products/edit/{id}','ProductsController@edit');
-        Route::patch('admin/products/{id}','ProductsController@update');
-        Route::post('/admin/products/filter', 'ProductsController@filter');
-        Route::get('/admin/products', 'ProductsController@index');
-        Route::get('/cart/create/order', 'CartController@createOrder');
+        Route::get(  '/cart/create/order', 'CartController@createOrder');
     });
     Route::post('/category/filter','CategoryController@filter');
-    Route::get('/cart/correct/{id}','CartController@correct');
-    Route::get('/cart/add/{id}','CartController@add');
-    Route::get('/cart/destroy/{id}','CartController@destroy');
+    Route::get( '/cart/correct/{id}','CartController@correct');
+    Route::get( '/cart/add/{id}','CartController@add');
+    Route::get( '/cart/destroy/{id}','CartController@destroy');
     Route::resource('cart','CartController');
-    Route::get('category/{id}','CategoryController@show');
-    Route::get('product/{id}','ProductsController@show');
-
-});
-
-Route::get('/test',function(){
-return \App\Products::with('category')->first();
+    Route::get( 'category/{id}','CategoryController@show');
+    Route::get( 'product/{id}','ProductsController@show');
 
 });
 
