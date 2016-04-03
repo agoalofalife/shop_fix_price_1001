@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/admin/products', 'ProductsController@index');
         Route::get('/cart/create/order', 'CartController@createOrder');
     });
+    Route::post('/category/filter','CategoryController@filter');
     Route::get('/cart/correct/{id}','CartController@correct');
     Route::get('/cart/add/{id}','CartController@add');
     Route::get('/cart/destroy/{id}','CartController@destroy');

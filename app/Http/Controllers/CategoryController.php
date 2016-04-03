@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category_Attributes;
+use App\Parameters;
 use DB;
 use Illuminate\Http\Request;
 use  Illuminate\Pagination\Paginator;
@@ -90,7 +92,9 @@ class CategoryController extends Controller
         $data['products']    = Products::where('status','1')
                                         ->where('count','>','0')
                                         ->where('id_catalog',$id)
-                                        ->paginate(5);
+                                        ->paginate(4);
+        $data['field_attributs'] = Category_Attributes::where('id_category', $id)->get();
+
         return view('category.index',$data);
     }
 
@@ -141,5 +145,63 @@ class CategoryController extends Controller
         Category_Products::destroy($id);
         return redirect('/admin/category');
 
+    }
+
+    public function filter(Request $request)
+    {
+
+        //Ищем по параметру от пользователся запросом в бд
+        //Найденные результаты заносим в массив
+        foreach ($request->toArray() as $id_parameter => $get_form) {
+                //Если в параметрах пусто то мы не ищем ничего
+            if ((empty($get_form) || empty($get_form[0])) || ($id_parameter=='_token')) continue;
+
+            if (Category_Attributes::find($id_parameter)->type == 'text') {
+                $result_array[] = Parameters:: where('id_parameter', $id_parameter)
+                    ->where('data', 'like', $get_form)
+                    ->get();
+            }
+
+            if (Category_Attributes::find($id_parameter)->type == 'number') {
+                $result_array[] = Parameters::where('data', '>', $get_form[0])
+                    ->where('id_parameter', $id_parameter)
+                    ->get();
+                $result_array[] = Parameters::where('data', '>', $get_form[1])
+                                              ->where('id_parameter', $id_parameter)
+                                              ->get();
+            }
+
+            if (Category_Attributes::find($id_parameter)->type == 'select') {
+                $result_array[] = Parameters::where('data', $get_form[0])
+                    ->get();
+            }
+        }
+
+        //Второй массив  костыль Иваныч_мы_вас_заждолись
+        //Он ищет повторные результаты
+        $id_product = array();
+        if (!empty($result_array))
+        {
+            foreach($result_array as $itemsCollection)
+            {
+                foreach($itemsCollection as $r=>$Paramerters)
+                {
+                    if(in_array($Paramerters->id_product, $id_product))continue;
+                    $id_product[] = $Paramerters->id_product;
+                }
+            }
+        }
+
+
+        //Передаем наши отфильтрованные продукты еще с печки
+            $data['products'] = DB::table('products')
+                                ->where('count', '>',0)
+                                ->whereIn('id',$id_product)
+                                ->paginate(4);
+
+        $categories          = Category_Products::all()->where('status','1');
+        $data['categories']  = $categories;
+
+        return view('category.index',$data);
     }
 }
